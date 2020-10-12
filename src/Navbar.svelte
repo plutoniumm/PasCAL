@@ -1,5 +1,5 @@
-<script lang="ts">
-  let head: string = 'Pascal'
+<script>
+  let head = "Pascal";
 </script>
 
 <style>

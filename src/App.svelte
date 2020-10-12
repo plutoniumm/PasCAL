@@ -1,72 +1,28 @@
-<script lang="ts">
-  import Nbar from './Navbar.svelte'
-  import Ddown from './Dropdown.svelte'
-  import { fade } from 'svelte/transition'
-  import { derivative, e, evaluate, log, pi, pow, round, sqrt } from 'mathjs'
+<script>
+  import Nbar from "./Navbar.svelte";
+  import Ddown from "./Dropdown.svelte";
+  import { fade } from "svelte/transition";
 
-  let name: string = 'Pascal',
-    answer = 'Answer is'
-  var func: string = '',
-    range: string = '0,pi',
-    tol = '.01',
-    NMAX = 100
-  $: lLim = eval(range.split(',')[0].replace('pi', 'Math.PI'))
-  $: uLim = eval(range.split(',')[1].replace('pi', 'Math.PI'))
+  let name = "Pascal",
+    answer = "Answer is";
+  var func = "",
+    range = "0,pi",
+    tol = ".01",
+    NMAX = 100;
+  $: lLim = eval(range.split(",")[0].replace("pi", "Math.PI"));
+  $: uLim = eval(range.split(",")[1].replace("pi", "Math.PI"));
 
   function exporter(c, fn, tol, n) {
-    answer = `The root is ${c} at ${fn} within ${tol} taking ${n} iterations`
-  }
-
-  function bisector(funcStr, a, b, tollerance, NMAX) {
-    let n = 1,
-      caller = false,
-      tol = Number(tollerance)
-    const f = evaluate('f(x) = ' + funcStr)
-    let c = (a + b) / 2
-    while (n < NMAX && f(c) > tol && a != b) {
-      if (f(c) < tol || (b - a) / 2 < tol) {
-        exporter(c, f(c), tol, n)
-        caller = true
-      }
-      n++
-      if (f(c) * f(a) > 0) {
-        a = c
-      } else {
-        b = c
-      }
-      if (!caller) exporter(c, f(c), tol, n)
-    }
-  }
-
-  function falsi(funcStr, a, b, tollerance, NMAX) {
-    let n = 1,
-      caller = false,
-      e = Number(tollerance)
-    const f = evaluate('f(x) = ' + funcStr)
-
-    if (f(b) * f(a) > 0) {
-      answer = 'No Answer in Interval'
-    } else {
-      let c = b - (f(b) * (b - a)) / (f(b) - f(a))
-      while (n < NMAX && Math.abs(f(c)) > e) {
-        c = b - (f(b) * (b - a)) / (f(b) - f(a))
-
-        if (f(a) * f(c) < 0) b = c
-        else a = c
-      }
-      console.log(c)
-    }
+    answer = `The root is ${c} at ${fn} within ${tol} taking ${n} iterations`;
   }
 
   function inputProcessor() {
-    let method = (document.querySelector(
-      'input[name = method]:checked'
-    ) as HTMLInputElement).value
+    let method = document.querySelector("input[name = method]:checked").value;
 
     switch (method) {
-      case 'bisect':
-        bisector(func, lLim, uLim, tol, NMAX)
-        break
+      case "bisect":
+        bisector(func, lLim, uLim, tol, NMAX);
+        break;
     }
   }
 </script>
