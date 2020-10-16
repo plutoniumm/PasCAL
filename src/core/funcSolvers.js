@@ -1,11 +1,12 @@
 import { derivative, e, evaluate, log, pi, pow, round, sqrt } from "mathjs";
 
-export const bisection = ( a, b, f, TOL ) => {
+export const bisection = ( a, b, fn, TOL ) => {
+      const f = math.parse( fn );
       let p, fa, fp;
       for ( let i = 0;i <= Math.floor( ( b - a ) / TOL );i++ ) {
             p = ( a + b ) / 2;
-            fa = f( a );
-            fp = f( p );
+            fa = f.evaluate( { x: a } );
+            fp = f.evaluate( { x: p } );
             if ( ( b - a ) < TOL || fp == 0 ) break
             else if ( fa * fp < 0 ) b = p;
             else {
@@ -16,10 +17,11 @@ export const bisection = ( a, b, f, TOL ) => {
       return p;
 }
 
-export const secant = ( x0, x1, f, TOL, NMax ) => {
-      let ctr = false, init = x0, itr = x1, finit = f( init ), fitr;
+export const secant = ( x0, x1, fn, TOL, NMax ) => {
+      const f = math.parse( fn )
+      let ctr = false, init = x0, itr = x1, finit = f.evaluate( { x: init } ), fitr;
       for ( let i = 1;i <= NMax;i++ ) {
-            fitr = f( itr );
+            fitr = f.evaluate( { x: itr } );
             dx = fitr * ( itr - init ) / ( fitr - finit );
             val = itr - dx;
             if ( Math.abs( dx ) < TOL ) {
@@ -36,11 +38,12 @@ export const secant = ( x0, x1, f, TOL, NMax ) => {
       else return null;
 }
 
-export const regula = ( a, b, f, TOL, NMax ) => {
-      let fa = f( a ), fb = f( b ), init = b, ctr = false, finit, fFin;
+export const regula = ( a, b, fn, TOL, NMax ) => {
+      const f = math.parse( fn )
+      let fa = f.evaluate( { x: a } ), fb = f.evaluate( { x: b } ), init = b, ctr = false, finit, fFin;
       for ( let i = 1;i <= NMax;i++ ) {
             finit = b - fb * ( b - a ) / ( fb - fa );
-            fFin = f( finit );
+            fFin = f.evaluate( { x: init } );
             if ( Math.abs( finit - init ) < TOL ) {
                   ctr = true;
                   break
@@ -59,13 +62,15 @@ export const regula = ( a, b, f, TOL, NMax ) => {
       else return null;
 }
 
-export const newton = ( a, f, TOL, NMax ) => {
-      let df = derivative( f ), p = a, fdf, i;
+export const newton = ( a, fn, TOL, NMax ) => {
+      const f = math.parse( fn )
+      const df = math.derivative( f, 'x' );
+      let p = a, fdf = 1, i = 0;
       for ( i = 1;i <= NMax;i++ ) {
-            fdf = f( p ) / df( p );
+            fdf = f.evaluate( { x: p } ) / df.evaluate( { x: p } );
             if ( Math.abs( fdf ) < TOL ) break;
             else p = p - fdf;
       }
-      if ( i == Nmax || Math.abs( fdf ) > TOL ) return null;
+      if ( i == NMax || Math.abs( fdf ) > TOL ) return null;
       else return p;
 }
