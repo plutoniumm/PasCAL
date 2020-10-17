@@ -9,7 +9,6 @@
     margin: 0;
     font-weight: 600;
     color: #3c1874;
-    /* background: rgb(220, 230, 250); */
   }
 </style>
 

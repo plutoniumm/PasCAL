@@ -1,10 +1,14 @@
 <script>
   import Nbar from "./components/nav.svelte";
+  import Output from "./components/out.svelte";
   import Ddown from "./components/ddown.svelte";
   import Inputs from "./components/inputs.svelte";
+  import Footer from "./components/foot.svelte";
 
+  $: state = { set: "eqns", method: "Bisection" };
   const fnHandler = (e) => {
-    console.log(e.target.innerText);
+    state.method = e.target.innerText;
+    state.set = e.target.parentElement.parentElement.id;
   };
 </script>
 
@@ -17,6 +21,8 @@
 
 <main>
   <Nbar />
-  <Ddown {fnHandler} />
-  <Inputs />
+  <Ddown {state} {fnHandler} />
+  <Inputs {state} />
+  <Output />
+  <Footer />
 </main>

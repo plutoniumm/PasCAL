@@ -1,5 +1,5 @@
 <script>
-  export let fnHandler;
+  export let fnHandler, state;
 </script>
 
 <style type="text/scss">
@@ -36,6 +36,10 @@
         }
       }
     }
+    .active {
+      background: #3c1874;
+      color: #ddd;
+    }
   }
 </style>
 
@@ -44,18 +48,20 @@
     <th>
       <div>Linear Eq<sup>n</sup>s</div>
     </th>
-    <td><button>Bisection</button></td>
-    <td><button>Secant</button></td>
-    <td><button>Regula Falsi</button></td>
-    <td><button>Newton-Raphson</button></td>
+    {#each ['Bisection', 'Secant', 'Regula-Falsi', 'Newton-Raphson'] as mth}
+      <td>
+        <button class={state.method == mth ? 'active' : ''}>{mth}</button>
+      </td>
+    {/each}
   </tr>
   <tr id="matrix">
     <th>
       <div>Matrices</div>
     </th>
-    <td><button>Multiply</button></td>
-    <td><button>Inverse</button></td>
-    <td><button>LU Dolittle</button></td>
-    <td><button>LU Crout</button></td>
+    {#each ['Multiply', 'Inverse', 'LU-Dolittle', 'LU-Crout'] as mth}
+      <td>
+        <button class={state.method == mth ? 'active' : ''}>{mth}</button>
+      </td>
+    {/each}
   </tr>
 </table>
