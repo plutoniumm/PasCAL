@@ -3,11 +3,13 @@
 
 <style>
   nav {
-    width: calc(100% - 0.5em);
+    text-align: center;
+    width: calc(100% - 1em);
     padding: 0.5em 0.25em 0.25em 0.5em;
     margin: 0;
-    color: white;
-    background: #55f;
+    font-weight: 600;
+    color: #3c1874;
+    /* background: rgb(220, 230, 250); */
   }
 </style>
 

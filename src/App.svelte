@@ -1,18 +1,22 @@
 <script>
-  import Nbar from "./components/Navbar.svelte";
-  import Ddown from "./components/Dropdown.svelte";
+  import Nbar from "./components/nav.svelte";
+  import Ddown from "./components/ddown.svelte";
+  import Inputs from "./components/inputs.svelte";
+
+  const fnHandler = (e) => {
+    console.log(e.target.innerText);
+  };
 </script>
 
 <style>
   main {
-    widows: 100%;
+    width: 100%;
     height: 100%;
-    color: #fff;
-    background: #333;
   }
 </style>
 
 <main>
   <Nbar />
-  <Ddown />
+  <Ddown {fnHandler} />
+  <Inputs />
 </main>
