@@ -19,4 +19,4 @@
   }
 </style>
 
-<div><span> This is where the answer will be </span></div>
+<div><span id="answer">No Input Yet</span></div>

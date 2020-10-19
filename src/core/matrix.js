@@ -1,10 +1,4 @@
-const math = require( 'mathjs' )
-
-// const matrix = math.matrix( matrixI ); (THIS MAKES MATRIX)
-// const matrix = math.multiply( matrixA, matrixB ); (THIS MULTIPLIES)
-// const matrix1 = math.divide( matrixA, matrixI ); (THIS CALCULATES INVERSE)
-
-const crout = ( A ) => {
+export const crout = ( A ) => {
       let i, j, k, U = [ [], [], [] ], L = [ [], [], [] ];
       const n = A.length;
       var sum = 0;
@@ -27,7 +21,7 @@ const crout = ( A ) => {
       return { lower: L, upper: U }
 }
 
-const dolittle = ( A ) => {
+export const dolittle = ( A ) => {
       let i, j, k, U = [ [], [], [] ], L = [ [], [], [] ];
       const n = A.length;
       var sum = 0;
@@ -54,28 +48,6 @@ const dolittle = ( A ) => {
             }
       }
       return { lower: L, upper: U }
-}
-
-const A = [
-      [ 1, 1, 2 ],
-      [ -1, 0, 2 ],
-      [ 3, 2, -1 ]
-
-]
-
-console.log( dolittle( A ) )
-
-const multiNewton = ( a, fn, TOL, NMax, multiplicity ) => {
-      const f = math.parse( fn )
-      const df = math.derivative( f, 'x' );
-      let p = a, fdf = 1, i = 0;
-      for ( i = 1;i <= NMax;i++ ) {
-            fdf = f.evaluate( { x: p } ) / df.evaluate( { x: p } );
-            if ( Math.abs( fdf ) < TOL ) break;
-            else p = p - ( multiplicity * fdf );
-      }
-      if ( i == NMax || Math.abs( fdf ) > TOL ) return null;
-      else return p;
 }
 
 // const seidel = ( A, x, b ) => {

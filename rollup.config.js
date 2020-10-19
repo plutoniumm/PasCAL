@@ -3,7 +3,7 @@ import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import livereload from 'rollup-plugin-livereload';
 import { terser } from 'rollup-plugin-terser';
-import json from "@rollup/plugin-json";
+// import json from "@rollup/plugin-json";
 import preprocess from 'svelte-preprocess';
 
 const production = !process.env.ROLLUP_WATCH;
@@ -34,7 +34,7 @@ export default {
 		!production && serve(),
 		!production && livereload( 'public' ),
 		production && terser(),
-		json()
+		// json()
 	],
 	watch: { clearScreen: true }
 };

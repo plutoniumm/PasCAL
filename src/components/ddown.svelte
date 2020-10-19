@@ -6,6 +6,7 @@
   table {
     font-size: 1.25em;
     width: 100%;
+    table-layout: fixed;
     tr {
       padding: 0;
       margin: 0;
@@ -22,23 +23,45 @@
     td,
     th {
       padding: 10px;
+      display: table-cell;
       button {
         color: #3c1874;
         font-size: 1.25em;
         width: 100%;
-        background: #ddd;
+        background: #eee;
+        border: 1px solid transparent;
         cursor: pointer;
         border-radius: 10px;
         transition: all 0.3s ease;
         &:hover {
-          background: #3c1874;
-          color: #ddd;
+          border: 1px solid #3c1874;
+        }
+        &:active {
+          background: #ddd;
         }
       }
     }
     .active {
       background: #3c1874;
-      color: #ddd;
+      color: #eee;
+    }
+  }
+  @media (max-width: 600px) {
+    table {
+      font-size: 1em;
+      table-layout: fixed;
+      th {
+        div {
+          padding: 5px;
+        }
+      }
+      td,
+      th {
+        padding: 5px;
+        button {
+          font-size: 1em;
+        }
+      }
     }
   }
 </style>

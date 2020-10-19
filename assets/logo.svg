@@ -1,8 +1,8 @@
 <svg height="512" width="512" viewbox="0 0 512 512" font-family="Arial Black, Times New Roman" xmlns="http://www.w3.org/2000/svg" font-size='300' fill="#fff">
   <defs>
     <linearGradient id="grad1">
-      <stop offset="0%" style="stop-color:#c75f5f" />
-      <stop offset="100%" style="stop-color:#8b275f" />
+      <stop offset="0%" style="stop-color:#de354c" />
+      <stop offset="100%" style="stop-color:#bc132a" />
     </linearGradient>
   </defs>
   <rect width="512" height="512" rx="100" fill="url(#grad1)" />

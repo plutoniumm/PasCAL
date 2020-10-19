@@ -13,6 +13,9 @@
 
  NMax: Whole Number <5000
 
+### Disclaimer
+
+There may be errors in the program it has been written largely manually. If you find bugs please report them, not recommended for use on a test.
 
 ### Why The Name?
 

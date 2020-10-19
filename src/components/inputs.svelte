@@ -1,5 +1,29 @@
 <script>
+  import { inputHandler } from "../core/IOHandler";
   export let state;
+
+  let func,
+    tol = "10e-6",
+    nmax = 500,
+    init,
+    fin,
+    matA,
+    matB;
+
+  const matrixParser = (str) => {
+    return JSON.parse(str);
+  };
+
+  $: inputs = {
+    state: state,
+    func: func,
+    tol: Number(tol),
+    nmax: Number(nmax),
+    init: +init,
+    final: +fin,
+    matA: matrixParser(matA || [1]),
+    matB: matrixParser(matB || [1]),
+  };
 
   import { slide, fade } from "svelte/transition";
 </script>
@@ -20,7 +44,8 @@
       top: 14px;
       padding: 0 2px;
       pointer-events: none;
-      background: #f3f3f3;
+      border-radius: 8px;
+      background: #3c1874;
       transition: transform 0.2s ease;
       transform: translateY(-20px);
     }
@@ -28,7 +53,7 @@
       outline: none;
       border: 1px solid #bbb;
       padding: 10px 20px;
-      border-radius: 20px;
+      border-radius: 10px;
       &::placeholder {
         color: transparent;
       }
@@ -40,13 +65,22 @@
           }
         }
       }
+      &:disabled {
+        background: #8888;
+        + {
+          label {
+            background: transparent;
+            color: #fff;
+            transform: translateY(0);
+          }
+        }
+      }
       &:focus {
         border-color: #3c1874;
         + {
           label {
             background: #3c1874;
             color: #fff;
-            border-radius: 8px;
             transform: translateY(-20px);
           }
         }
@@ -77,13 +111,13 @@
   }
 </style>
 
-<form>
+<form on:submit|preventDefault={inputHandler(inputs)}>
   {#if state.set == 'eqns'}
     <div transition:slide style="overflow:hidden;padding:1em;">
       <div class="input-wrapper" style="width:100%">
         <input
+          bind:value={func}
           style="width:calc(100% - 2em - 40px)"
-          type="text"
           name="function"
           placeholder="Ex. sin(x) - (cos(x))^2 - 3"
           required />
@@ -91,7 +125,7 @@
       </div>
       <div class="input-wrapper" style="width:calc(50% - 2em)">
         <input
-          type="text"
+          bind:value={tol}
           name="tol"
           style="width:calc(100% - 40px)"
           placeholder="Ex. 10e-6"
@@ -100,7 +134,7 @@
       </div>
       <div class="input-wrapper" style="width:calc(50% - 2em)">
         <input
-          type="text"
+          bind:value={nmax}
           name="nmax"
           max="5000"
           style="width:calc(100% - 40px)"
@@ -110,16 +144,17 @@
       </div>
       <div class="input-wrapper" style="width:calc(50% - 2em)">
         <input
-          type="text"
+          bind:value={init}
           style="width:calc(100% - 40px)"
-          name="from"
-          placeholder="Ex. -1.5"
+          name="to"
+          placeholder="Ex. -1.55"
           required />
         <label for="from">INITAL PT</label>
       </div>
       <div class="input-wrapper" style="width:calc(50% - 2em)">
         <input
-          type="text"
+          bind:value={fin}
+          disabled={state.method == 'Newton-Raphson'}
           style="width:calc(100% - 40px)"
           name="to"
           placeholder="Ex. 3.3355"
@@ -131,7 +166,7 @@
     <div transition:slide style="overflow:hidden;padding:1em;">
       <div class="input-wrapper" style="width:calc(50% - 2em)">
         <input
-          type="text"
+          bind:value={matA}
           name="matA"
           style="width:calc(100% - 40px)"
           placeholder="Ex. [[1,2,3],[4,0,2],[6,2,5]]"
@@ -144,7 +179,7 @@
           class="input-wrapper"
           style="width:calc(50% - 2em)">
           <input
-            type="text"
+            bind:value={matB}
             name="matB"
             style="width:calc(100% - 40px)"
             placeholder="Ex. [[0,5,2],[9,7,2],[0,5.44,0]]"
