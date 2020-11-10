@@ -189,7 +189,5 @@
       {/if}
     </div>
   {/if}
-  <div class="calculate">
-    <input type="submit" value="This shouldn't be by hand ever" />
-  </div>
+  <div class="calculate"><input type="submit" value="Calculate" /></div>
 </form>

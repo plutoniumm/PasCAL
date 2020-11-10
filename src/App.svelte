@@ -24,6 +24,6 @@
   <Ddown {state} {fnHandler} />
   <Inputs {state} />
   <Output />
-  <Footer />
   TODO: Add Link to DOCS
+  <Footer />
 </main>

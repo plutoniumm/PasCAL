@@ -5,8 +5,7 @@
   footer {
     text-align: center;
     width: 100%;
-    position: absolute;
-    bottom: 0;
+    padding-top: 100px;
     img {
       width: 50px;
       height: auto;
@@ -21,6 +20,12 @@
         top: -10px;
         line-height: 35px;
         padding: 5px;
+        background-image: linear-gradient(135deg, #ffd166, #eb7070);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        -moz-background-clip: text;
+        -moz-text-fill-color: transparent;
       }
     }
   }
