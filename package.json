@@ -20,7 +20,7 @@
     "svelte-preprocess": "4.5.2"
   },
   "dependencies": {
-    "mathjs": "7.5.1",
+    "mathjs": "8.1.1",
     "sirv-cli": "1.0.8"
   },
   "browserslist": [
