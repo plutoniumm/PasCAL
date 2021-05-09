@@ -17,7 +17,7 @@
     "rollup-plugin-svelte": "6.1.0",
     "rollup-plugin-terser": "7.0.2",
     "svelte": "3.29.4",
-    "svelte-preprocess": "4.5.2"
+    "svelte-preprocess": "4.7.3"
   },
   "dependencies": {
     "mathjs": "7.5.1",
